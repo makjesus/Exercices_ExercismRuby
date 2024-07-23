@@ -1,5 +1,5 @@
-# Define a constante com o tempo de cozimento por camada
-COOKING_TIME_PER_LAYER = 40
+# Define a constante com o tempo de cozimento
+COOKING_TIME_PER_LAYER = 15
 
 # Função que retorna o tempo total de cozimento baseado no número de camadas
 def cooking_time_in_minutes(layers)
@@ -22,5 +22,5 @@ elapsed_time = 20
 
 total_cooking_time = total_cooking_time_in_minutes
 remaining_time = remaining_time_in_minutes(total_cooking_time, elapsed_time)
-puts "Tempo total de cozimento: #{cooking_time_in_minutes(layers)} minutos"
-puts "Tempo restante: #{remaining_time} minutos"
+puts "Esse foi o tempo total de cozimento: #{cooking_time_in_minutes(layers)} minutos"
+puts "Falta ainda: #{remaining_time} minutos"
