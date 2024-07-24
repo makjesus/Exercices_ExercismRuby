@@ -51,6 +51,7 @@ class Lasagna
 end
 
 lasagna = Lasagna.new
-puts "Faltam ainda no forno : #{lasagna.remaining_minutes_in_oven(30)}"
-puts "Tempo preparado em minutos :#{lasagna.preparation_time_in_minutes(3)}"
-puts "Tempo total gasto em minutos:#{lasagna.total_time_in_minutes(number_of_layers: 3, actual_minutes_in_oven: 30)}"
+puts "Faltam ainda no forno: #(lasagna.minutos_restantes_forno(30))
+puts lasagna.tempo_de_preparacao_em_minutos(3)
+puts lasagna.tempo_total_em_minutos(numero_de_camadas: 3, minutos_atuais_forno: 30)
+=end
