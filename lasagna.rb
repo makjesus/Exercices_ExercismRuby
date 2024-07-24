@@ -15,5 +15,7 @@ class Lasagna
   end
 end
 
-puts " Tempo total #{number_of_layers + actual_minutes_in_oven} minutos"
-puts "Tempo total de cozimento: #{} minutos"
+lasagna = Lasagna.new
+puts lasagna.remaining_minutes_in_oven(30)
+puts lasagna.preparation_time_in_minutes(3) 
+puts lasagna.total_time_in_minutes(number_of_layers: 3, actual_minutes_in_oven: 30) # Espera-se 36
