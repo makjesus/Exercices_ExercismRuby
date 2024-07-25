@@ -31,3 +31,33 @@ class Attendee
     @pass_id = nil
   end
 end
+
+puts "Insira a altura do participante em centímetros:"
+  height = gets.chomp.to_i
+  attendee = Attendee.new(height)
+
+  puts "Altura do participante: #{attendee.height} cm"
+  puts "Pass ID antes da emissão: #{attendee.pass_id.inspect}"
+
+  puts "Insira o ID do passe para emitir:"
+  pass_id = gets.chomp
+  attendee.issue_pass!(pass_id)
+
+  puts "Pass ID após emissão: #{attendee.pass_id}"
+
+  attendee.revoke_pass!
+  puts "Pass ID após revogação: #{attendee.pass_id.inspect}"
+
+=begin
+attendee = Attendee.new(150)
+puts attendee.height  # Output: 150
+puts attendee.pass_id # Output: nil
+
+# Issue a pass with ID 12345
+attendee.issue_pass!(12345)
+puts attendee.pass_id # Output: 12345
+
+# Revoke the pass
+attendee.revoke_pass!
+puts attendee.pass_id # Output: nil
+=end
