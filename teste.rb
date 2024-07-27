@@ -1,11 +1,17 @@
-class Ticket
-  def issue_pass!(pass_id)
-    @pass_id = pass_id
-    @pass_id
+class Pessoa
+  def initialize(name, age)
+    @name = name  # Variável de instância para armazenar o nome
+    @age = age    # Variável de instância para armazenar a idade
+  end
+
+  def mostrar_informacoes
+    puts "Nome: #{@name}, Idade: #{@age}"
   end
 end
 
-ticket = Ticket.new
-puts "#{ticket.issue_pass!(12345)} # Isso atribui 12345 a @pass_id e retorna 12345."
+pessoa1 = Pessoa.new("Alice", 30)
+pessoa1.mostrar_informacoes  # Output: Nome: Alice, Idade: 30
 
-porque o metodo usou o sinal de interrogação nesse caso expecifico
+pessoa2 = Pessoa.new("Bob", 25)
+pessoa2.mostrar_informacoes  # Output: Nome: Bob, Idade: 25
+
