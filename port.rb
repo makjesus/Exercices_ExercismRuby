@@ -116,7 +116,8 @@ class Port
 
   # Método para obter o identificador de um dado nome de porto
   def self.get_identifier(port_name)
-    # Extrai as quatro primeiras letras do nome do porto, converte para maiúsculas e retorna como símbolo
+    # Extrai as quatro primeiras letras do nome do porto, converte para
+    #maiúsculas e retorna como símbolo
     port_name[0, 4].upcase.to_sym
   end
 
@@ -142,5 +143,5 @@ end
 # Exemplos de uso
 puts Port::IDENTIFIER                     # Output: PALE
 puts Port.get_identifier('Palermo')       # Output: :PALE
-puts Port.get_terminal(:OIL123)            # Output: :A
-puts Port.get_terminal(:CAR456)            # Output: :B
+puts Port.get_terminal(:OIL778)            # Output: :A
+puts Port.get_terminal(:GAS188)            # Output: :B
