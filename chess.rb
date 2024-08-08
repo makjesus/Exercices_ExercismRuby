@@ -7,15 +7,15 @@ module Chess
 
   # Define o método de classe 'valid_square?' que verifica se uma posição no tabuleiro é válida.
   def self.valid_square?(rank, file)
-    # Verifica se a 'rank' (fileira) está dentro do intervalo válido de 1 a 8.
-    valid_ranks = (1..8).include?(rank)
-    
-    # Verifica se o 'file' (coluna) está dentro do intervalo válido de 'a' a 'h'.
-    valid_files = ('a'..'h').include?(file)
-    
-    # Retorna verdadeiro se ambos os valores (fileira e coluna) forem válidos.
-    valid_ranks && valid_files
-  end
+  # Verifica se a 'rank' (fileira) está dentro do intervalo válido de 1 a 8.
+  valid_ranks = (1..8).include?(rank)
+  
+  # Converte 'file' para minúscula e verifica se está dentro do intervalo válido de 'a' a 'h'.
+  valid_files = ('a'..'h').include?(file.downcase)
+  
+  # Retorna verdadeiro se ambos os valores (fileira e coluna) forem válidos.
+  valid_ranks && valid_files
+end
 
   # Define o método de classe 'nick_name' que gera um apelido a partir do primeiro e último nome fornecidos.
   def self.nick_name(first_name, last_name)
