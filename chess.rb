@@ -1,59 +1,70 @@
 module Chess
-  # Define a constante RANKS como um intervalo de 1 a 8, representando as fileiras do tabuleiro de xadrez.
+  # Define um módulo chamado `Chess`.
+  # Módulos em Ruby são usados para agrupar métodos, constantes e classes relacionados.
+
   RANKS = 1..8
+  # Define uma constante `RANKS` que representa as fileiras válidas em um tabuleiro de xadrez (1 a 8).
 
-  # Define a constante FILES como um intervalo de 'A' a 'H', representando as colunas do tabuleiro de xadrez.
   FILES = 'A'..'H'
+  # Define uma constante `FILES` que representa as colunas válidas em um tabuleiro de xadrez (A a H).
 
-  # Define o método de classe 'valid_square?' que verifica se uma posição no tabuleiro é válida.
   def self.valid_square?(rank, file)
-  # Verifica se a 'rank' (fileira) está dentro do intervalo válido de 1 a 8.
-  valid_ranks = (1..8).include?(rank)
-  
-  # Converte 'file' para minúscula e verifica se está dentro do intervalo válido de 'a' a 'h'.
-  valid_files = ('a'..'h').include?(file.downcase)
-  
-  # Retorna verdadeiro se ambos os valores (fileira e coluna) forem válidos.
-  valid_ranks && valid_files
-end
+    # Define um método de classe `valid_square?` que verifica se uma posição (rank, file) é válida no tabuleiro de xadrez.
+    valid_ranks = RANKS.include?(rank)
+    # Verifica se a `rank` (fileira) fornecida está incluída na constante `RANKS`.
 
-  # Define o método de classe 'nick_name' que gera um apelido a partir do primeiro e último nome fornecidos.
-  def self.nick_name(first_name, last_name)
-    # Cria um apelido usando os dois primeiros caracteres do primeiro nome e os dois últimos caracteres do último nome.
-    nickname = first_name[0,2] + last_name[-2, 2]
+    valid_files = FILES.include?(file.upcase)
+    # Verifica se a `file` (coluna) fornecida está incluída na constante `FILES`, após converter a letra para maiúscula.
+
+    valid_ranks && valid_files
+    # Retorna `true` se ambas as condições (`valid_ranks` e `valid_files`) forem verdadeiras, caso contrário retorna `false`.
   end
 
-  # Define o método de classe 'move_message' que gera uma mensagem sobre o movimento de uma peça no tabuleiro.
+  def self.nick_name(first_name, last_name)
+    # Define um método de classe `nick_name` que gera um apelido a partir do primeiro nome e do sobrenome.
+    
+    first_two = first_name.length < 2 ? first_name.ljust(2, first_name).upcase : first_name[0, 2].upcase
+    # Se o `first_name` tiver menos de 2 caracteres, preenche o nome à direita com o próprio caractere para ter exatamente 2 letras e converte para maiúsculas.
+    # Caso contrário, pega as duas primeiras letras do `first_name` e converte para maiúsculas.
+
+    last_two = last_name.length < 2 ? last_name.ljust(2, last_name).upcase : last_name[-2..-1].upcase
+    # Se o `last_name` tiver menos de 2 caracteres, preenche o nome à direita com o próprio caractere para ter exatamente 2 letras e converte para maiúsculas.
+    # Caso contrário, pega as duas últimas letras do `last_name` e converte para maiúsculas.
+
+    "#{first_two}#{last_two}"
+    # Retorna o apelido, que é a concatenação das duas letras do `first_name` e das duas letras do `last_name`.
+  end
+
   def self.move_message(first_name, last_name, square)
-    # Cria um nome completo usando o primeiro e o último nome fornecidos.
-    nickname = "#{first_name} #{last_name}"
+    # Define um método de classe `move_message` que gera uma mensagem de movimento de xadrez com base no nome e na posição do jogador.
     
-    # Cria uma lista dos arquivos válidos ('a' a 'h') como um array.
-    valid_files = ('a'..'h').to_a
-    
-    # Cria uma lista das fileiras válidas ('1' a '8') como um array.
-    valid_ranks = ('1'..'8').to_a
-    
-    # Extrai a coluna e a fileira do movimento fornecido.
-    file = square[0]
-    rank = square[1]
-    
-    # Verifica se a coluna e a fileira do movimento são válidas.
-    if valid_files.include?(file) && valid_ranks.include?(rank)
-      # Retorna uma mensagem indicando que o movimento é válido.
-      "#{nickname} moved to #{square}"
+    nickname = nick_name(first_name, last_name)
+    # Chama o método `nick_name` para gerar o apelido a partir do `first_name` e `last_name`.
+
+    file = square[0].upcase
+    # Extrai a primeira letra do `square` (representando a coluna) e converte para maiúsculas.
+
+    rank = square[1].to_i
+    # Extrai o segundo caractere do `square` (representando a fileira) e converte para inteiro.
+
+    if valid_square?(rank, file)
+      # Verifica se a posição (rank, file) é válida usando o método `valid_square?`.
+
+      "#{nickname} moved to #{square.upcase}"
+      # Se a posição for válida, retorna uma mensagem dizendo que o jogador se moveu para a posição especificada.
     else
-      # Retorna uma mensagem indicando que o movimento não é válido.
-      "#{nickname} attempt to move to #{square}, but that is not valid square"
+      "#{nickname} attempted to move to #{square.upcase}, but that is not a valid square"
+      # Se a posição não for válida, retorna uma mensagem dizendo que o jogador tentou se mover para uma posição inválida.
     end
   end
 end
 
-# Testa o método 'valid_square?' com a fileira 1 e a coluna 'A', espera-se que retorne verdadeiro.
+# Testes dos métodos:
 puts Chess.valid_square?(1, 'A') # true
+# Verifica se a posição (1, 'A') é válida. Deverá retornar `true`.
 
-# Testa o método 'nick_name' com o primeiro nome "John" e o último nome "Doe", espera-se que retorne "JOOE".
 puts Chess.nick_name("John", "Doe")  # => "JOOE"
+# Gera um apelido a partir de "John Doe", que deverá ser "JOOE".
 
-# Testa o método 'move_message' com o primeiro nome "John", o último nome "Doe" e o movimento "A1", espera-se que retorne uma mensagem sobre o movimento.
-puts Chess.move_message("John", "Doe", "A1") #
+puts Chess.move_message("John", "Doe", "A1") # => "JOOE moved to A1"
+# Gera uma mensagem de movimento para "John Doe" na posição "A1". Deverá retornar "JOOE moved to A1".
